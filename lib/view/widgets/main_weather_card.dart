@@ -75,12 +75,15 @@ class MainWeatherCard extends StatelessWidget {
                   color: weather.textColor,
                 ),
               ),
+              SizedBox(height: 15.h),
               Text(
                 location,
                 style: AppTextStyles.medium15.copyWith(
                   color: weather.textColor,
                 ),
               ),
+              SizedBox(height: 15.h),
+
               Text(
                 date,
                 style: AppTextStyles.medium15.copyWith(

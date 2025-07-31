@@ -36,10 +36,7 @@ class WeatherHomePage extends ConsumerWidget {
             ),
             child: SafeArea(
               child: Padding(
-                padding: EdgeInsets.symmetric(
-                  vertical: 53.h,
-                  horizontal: 34.w,
-                ).copyWith(bottom: 0),
+                padding: EdgeInsets.symmetric(vertical: 53.h, horizontal: 34.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -169,7 +166,7 @@ class WeatherHomePage extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Random Text', style: AppTextStyles.semibold20),
+        Text('Random Text', style: AppTextStyles.semibold20),
         SizedBox(height: 10.h),
         Text(
           'Improve him believe opinion offered met and end cheered forbade. Friendly as stronger speedily by recurred. Son interest wandered sir addition end say. Manners beloved affixed picture men ask.',
