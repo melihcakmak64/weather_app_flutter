@@ -1,122 +1,114 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:weather_app/core/app_theme.dart';
-import 'package:weather_app/core/colors.dart';
+import 'package:weather_app/core/enums.dart';
 
 class MainWeatherCard extends StatelessWidget {
-  const MainWeatherCard({super.key});
+  final WeatherCondition weather;
+  final String temperature;
+  final String description;
+  final String location;
+  final String date;
+
+  const MainWeatherCard({
+    super.key,
+    required this.weather,
+    required this.temperature,
+    required this.description,
+    required this.location,
+    required this.date,
+  });
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(25),
+      borderRadius: BorderRadius.circular(25.r),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
         child: Container(
-          padding: const EdgeInsets.symmetric(
-            vertical: 25,
-          ).copyWith(bottom: 34),
+          padding: EdgeInsets.symmetric(vertical: 25.h),
           decoration: BoxDecoration(
-            color: AppColors.cloudyMainContainerColor,
+            color: weather.containerColor,
             borderRadius: BorderRadius.circular(35),
           ),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              // Today dropdown
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     'Today',
                     style: AppTextStyles.medium25.copyWith(
-                      color: AppColors.cloudyMainTextColor,
+                      color: weather.textColor,
                     ),
                   ),
-                  const SizedBox(width: 15),
+                  SizedBox(width: 15.w),
                   Icon(
                     Icons.keyboard_arrow_down,
-                    color: AppColors.cloudyMainTextColor,
-                    size: 20,
+                    color: weather.textColor,
+                    size: 20.w,
                   ),
                 ],
               ),
-
-              const SizedBox(height: 20),
-
-              // Weather icon and temperature
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  // Cloud icon
-                  const Icon(
-                    Icons.cloud,
-                    color: AppColors.cloudyMainTextColor,
-                    size: 72,
+                  SvgPicture.asset(
+                    weather.iconPath,
+                    height: 72.h,
+                    color: weather.textColor,
                   ),
-
-                  const SizedBox(width: 20),
-
-                  // Temperature
+                  SizedBox(width: 20.w),
                   Text(
-                    '25°',
+                    '$temperature°',
                     style: AppTextStyles.medium100.copyWith(
-                      color: AppColors.cloudyMainTextColor,
+                      color: weather.textColor,
                     ),
                   ),
                 ],
               ),
-
-              // Weather description
               Text(
-                'Cloudy',
+                description,
                 style: AppTextStyles.semibold20.copyWith(
-                  color: AppColors.cloudyMainTextColor,
+                  color: weather.textColor,
                 ),
               ),
-
-              const SizedBox(height: 15),
-
-              // Location
+              SizedBox(height: 15.h),
               Text(
-                'California, Los Angeles',
+                location,
                 style: AppTextStyles.medium15.copyWith(
-                  color: AppColors.cloudyMainTextColor,
+                  color: weather.textColor,
                 ),
               ),
-
-              const SizedBox(height: 25),
-
-              // Date
+              SizedBox(height: 25.h),
               Text(
-                '21 Oct 2019',
+                date,
                 style: AppTextStyles.medium15.copyWith(
-                  color: AppColors.cloudyMainTextColor,
+                  color: weather.textColor,
                 ),
               ),
-
-              const SizedBox(height: 15),
-
-              // Feels like and sunset
+              SizedBox(height: 15.h),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    'Feels like 28°',
+                    'Feels like $temperature°',
                     style: AppTextStyles.medium15.copyWith(
-                      color: AppColors.cloudyMainTextColor,
+                      color: weather.textColor,
                     ),
                   ),
                   Container(
-                    width: 1,
-                    height: 15,
-                    color: AppColors.cloudyMainTextColor,
+                    margin: EdgeInsets.symmetric(horizontal: 10.w),
+                    width: 1.w,
+                    height: 10.h,
+                    color: weather.textColor,
                   ),
                   Text(
                     'Sunset 18:20',
                     style: AppTextStyles.medium15.copyWith(
-                      color: AppColors.cloudyMainTextColor,
+                      color: weather.textColor,
                     ),
                   ),
                 ],
