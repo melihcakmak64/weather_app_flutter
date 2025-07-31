@@ -5,7 +5,7 @@ import 'package:weather_app/model/hourly_weather_model.dart';
 
 class WeatherService {
   Future<List<HourlyWeather>> fetchHourlyWeather(double lat, double lon) async {
-    final now = DateTime.now().toUtc();
+    final now = DateTime.now();
     final start = now.toIso8601String().split('.').first;
     final end = now.add(Duration(hours: 9)).toIso8601String().split('.').first;
 
