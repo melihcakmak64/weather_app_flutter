@@ -57,7 +57,7 @@ class WeatherHomePage extends ConsumerWidget {
 
                     SizedBox(height: 35.h),
                     _buildHourlyForecast(hourlyWeatherList, condition),
-                    SizedBox(height: 50.h),
+                    Spacer(),
                     _buildRandomTextSection(),
                   ],
                 ),

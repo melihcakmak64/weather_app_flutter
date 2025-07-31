@@ -26,7 +26,9 @@ final locationProvider = FutureProvider<LocationModel>((ref) async {
   );
 
   final place = placemarks.first;
-  final address = "${place.locality}, ${place.administrativeArea}";
+  final address = (place.locality ?? "").isNotEmpty
+      ? "${place.locality}, ${place.administrativeArea}"
+      : "${place.administrativeArea}";
 
   return LocationModel(
     latitude: position.latitude,
