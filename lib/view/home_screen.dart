@@ -7,6 +7,7 @@ import 'package:weather_app/controller/weather_provider.dart';
 import 'package:weather_app/core/app_theme.dart';
 import 'package:weather_app/core/enums.dart';
 import 'package:weather_app/model/hourly_weather_model.dart';
+import 'package:weather_app/view/widgets/hourly_forecast_widget.dart';
 import 'package:weather_app/view/widgets/hourly_item_widget.dart';
 import 'package:weather_app/view/widgets/main_weather_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -53,7 +54,10 @@ class WeatherHomePage extends ConsumerWidget {
                     ),
 
                     SizedBox(height: 35.h),
-                    _buildHourlyForecast(hourlyWeatherList, condition),
+                    HourlyForecastWidget(
+                      weatherList: hourlyWeatherList,
+                      condition: condition,
+                    ),
                     Spacer(),
                     _buildRandomTextSection(),
                   ],
@@ -86,52 +90,6 @@ class WeatherHomePage extends ConsumerWidget {
       "Dec",
     ];
     return months[month - 1];
-  }
-
-  Widget _buildHourlyForecast(
-    List<HourlyWeather> weatherList,
-    WeatherCondition condition,
-  ) {
-    final half1 = weatherList.sublist(0, 5);
-    final half2 = weatherList.sublist(5, 10);
-
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(25),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-        child: Container(
-          padding: EdgeInsets.all(30.w),
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                condition.containerColor.withOpacity(0.7),
-                condition.containerColor.withOpacity(0.3),
-              ],
-            ),
-            borderRadius: BorderRadius.circular(25.r),
-          ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: half1
-                    .map((hourly) => HourlItemWidget(hourlyWeather: hourly))
-                    .toList(),
-              ),
-              SizedBox(height: 15.h),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: half2
-                    .map((hourly) => HourlItemWidget(hourlyWeather: hourly))
-                    .toList(),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 
   Widget _buildRandomTextSection() {
