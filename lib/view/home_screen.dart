@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:weather_app/controller/location_provider.dart';
 import 'package:weather_app/controller/weather_provider.dart';
 import 'package:weather_app/core/app_theme.dart';
 import 'package:weather_app/core/enums.dart';
 import 'package:weather_app/model/hourly_weather_model.dart';
+import 'package:weather_app/view/widgets/hourly_item_widget.dart';
 import 'package:weather_app/view/widgets/main_weather_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -117,48 +117,20 @@ class WeatherHomePage extends ConsumerWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: half1
-                    .map((hourly) => _buildHourlyItem(hourly))
+                    .map((hourly) => HourlItemWidget(hourlyWeather: hourly))
                     .toList(),
               ),
               SizedBox(height: 15.h),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: half2
-                    .map((hourly) => _buildHourlyItem(hourly))
+                    .map((hourly) => HourlItemWidget(hourlyWeather: hourly))
                     .toList(),
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildHourlyItem(HourlyWeather hourly) {
-    final hour = hourly.time.hour == DateTime.now().hour
-        ? "Now"
-        : "${hourly.time.hour.toString().padLeft(2, '0')}:00";
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(hour, style: AppTextStyles.regular15),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            SvgPicture.asset(
-              hourly.condition.iconPath,
-              height: 12.h,
-              color: Colors.white,
-            ),
-            SizedBox(width: 5.w),
-            Text(
-              "${hourly.temperature.toStringAsFixed(0)}°",
-              style: AppTextStyles.regular15,
-            ),
-          ],
-        ),
-      ],
     );
   }
 
