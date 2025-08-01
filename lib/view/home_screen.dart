@@ -1,14 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:weather_app/controller/location_provider.dart';
 import 'package:weather_app/controller/weather_provider.dart';
 import 'package:weather_app/core/app_theme.dart';
-import 'package:weather_app/core/enums.dart';
-import 'package:weather_app/model/hourly_weather_model.dart';
 import 'package:weather_app/view/widgets/hourly_forecast_widget.dart';
-import 'package:weather_app/view/widgets/hourly_item_widget.dart';
 import 'package:weather_app/view/widgets/main_weather_card.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
